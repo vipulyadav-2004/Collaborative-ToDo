@@ -1,0 +1,11 @@
+# Virtual Environment folders
+.flaskenv
+venv/
+tf-env/
+
+# Other common Python files to ignore
+__pycache__/
+*.pyc
+.DS_Store
+
+instance/

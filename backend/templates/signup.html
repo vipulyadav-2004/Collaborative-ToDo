@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        /* CSS Styles (omitted here for brevity, assume they are the same as login.html or linked separately) */
+        /* ... place your combined CSS here or link style.css ... */
+
+        /* Copy and paste the CSS from login.html here for a complete file */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-image: url('../static/images/frame.png');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .body{
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.836);
+             display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #c3c3c3;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            width: 380px;
+        }
+
+        .form-header h2 {
+            text-align: center;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .form-header p {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #313233;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .btn-submit:hover {
+            background-color: #515253;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9em;
+        }
+
+        .login-link a {
+            color: #313233;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        /* Style for flashing messages (success/danger) */
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .flash-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .flash-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+<div class="body">
+    
+        <div class="container">
+            <div class="form-header">
+                <h2>Create Your Account</h2>
+                <p>Join the Task Manager community today!</p>
+            </div>
+    
+            <form method="POST" action="{{ url_for('main.Signup') }}">
+                {{ form.hidden_tag() }}
+    
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+    
+                <div class="input-group">
+                    {{ form.username.label }}
+                    {{ form.username(class="form-control", placeholder="Choose a username") }}
+                    {% for error in form.username.errors %}
+                        <span style="color: red; font-size: 0.8em;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+    
+                <div class="input-group">
+                    {{ form.email.label }}
+                    {{ form.email(class="form-control", placeholder="you@example.com") }}
+                    {% for error in form.email.errors %}
+                        <span style="color: red; font-size: 0.8em;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+    
+                <div class="input-group">
+                    {{ form.password.label }}
+                    {{ form.password(class="form-control", placeholder="Min. 8 characters") }}
+                    {% for error in form.password.errors %}
+                        <span style="color: red; font-size: 0.8em;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+    
+                <div class="input-group">
+                    {{ form.confirm_password.label }}
+                    {{ form.confirm_password(class="form-control", placeholder="Repeat your password") }}
+                    {% for error in form.confirm_password.errors %}
+                        <span style="color: red; font-size: 0.8em;">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+    
+                {{ form.signup(class="btn-submit") }}
+            </form>
+    
+            <div class="login-link">
+                Already have an account? <a href="{{ url_for('main.Login') }}">Log In</a>
+            </div>
+        </div>
+</div>
+
+</body>
+</html>

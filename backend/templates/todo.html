@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+    <title>{% block title %} Todo {% endblock %}</title>
+    {% block links %}
+    {{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/todo.css') }}">
+{% endblock %} 
+  {% block content %} 
+     <div class="main">
+      <div class="para">
+        <h2>write your task and hit the</h2>
+        <h2> add button!</h2>
+      </div>
+    <div class="to-do">
+  <div class="main-heading">ToDo List</div>
+  <div class="add-task">
+    <input type="text" placeholder="Add a new task" id="inpu-task">
+    <button onclick="addTask()" class="add-btn">Add</button>
+  </div>
+  <ul class="task-list" id="taskList">
+
+  </ul>
+  </div>
+  </div>
+  
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% endblock %}
+  

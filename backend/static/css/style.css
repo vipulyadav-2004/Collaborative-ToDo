@@ -1,0 +1,208 @@
+*{
+  margin:0;
+  padding: 0;
+    box-sizing: border-box;
+
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.container{
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  background: linear-gradient(135deg, #1e2423, #000000);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px 2fr;
+  grid-template-areas: "header header"
+  "main main ";
+  
+}
+.main-header {
+    width: 100%;
+    grid-area: header;
+    background: linear-gradient(135deg, #1e2423, #000000);
+    transition: background-color 1s ease-in;
+    display: flex; /* Use flexbox for the main header items */
+    justify-content: space-between; /* Push the logo/title group and nav-links group to the edges */
+    align-items: center;
+    padding: 0 20px; /* Add general padding */
+     position: fixed;
+    
+    
+}
+
+/* 💡 New: Container for Logo and Title */
+.main-header > div:first-child {
+  
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+  height: auto;
+  display: inline-block;
+  width: 70px;
+  
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.heading{
+   
+  margin-top: 0;
+  display: inline-block;
+  align-self: center;
+  font-size: 30px;
+  font-family: sans-serif;
+  font-style:inherit;
+  font-weight: 700;
+  /*color: rgb(11, 92, 180);*/
+  color: #f1e8be;
+}
+.d-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.tick {
+  background-color: none;
+  position: absolute;
+  top: 0.06rem;
+  left: 0.02em;
+  font-size: 1.2em;
+  transform: rotate(10deg);
+ text-shadow: none;
+ 
+}
+
+.nav-links {
+    /* Removed fixed width to allow flex properties to work */
+    height: 100%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    /* Use gap for spacing between links */
+    gap: 40px; 
+    margin: 0; /* Remove default margin */
+}
+
+.nav-links li {
+    /* Remove unnecessary width/centering to allow links to size content */
+    display: flex; 
+    width: auto;
+    padding: 5px 0; /* Add vertical padding for hover area */
+}
+
+.anchor {
+    /* Remove fixed width, let content determine size */
+    width: auto; 
+    padding: 6px 12px; /* Padding for better hover target */
+    font-size: 20px;
+    text-decoration: none;
+    color: #f1e8be;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    border-radius: 10px; /* Rounded corners for hover effect */
+}
+.anchor-acc {
+    /* Use inline-flex to center the 'A' text perfectly */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: auto;
+    height: 40px;
+    font-size: 20px;
+    border: 1px solid #6b99f5;
+    color: #0D224B; /* Dark text color */
+    font-weight: 400;
+    border-radius: 5px;
+    /* Remove padding: 7px; since width/height handle size */
+    background-color: #729af8;
+    transition:background-color 0.3s, border-radius 0.3s;
+    cursor: pointer;
+}
+.anchor-acc:hover {
+    background-color: #f5f5f5; /* Subtle hover effect */
+    border-radius: 20px;
+}
+.anchor:hover {
+    background-color: rgba(146, 146, 173, 0.205); 
+    color: white;
+    
+}
+
+
+.main{
+  grid-area: main;
+    background-image: linear-gradient(135deg ,  rgb(59, 59, 59),rgb(39, 39, 39),black);
+    align-items: center;
+    width: 100%;
+
+}
+.banner{
+  padding: 0 10px 0 10px;
+  width: 100%;
+  height: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+.img{
+  margin-left: 90px;
+  margin-top: -60px;
+   display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+.headtext{
+  display: flex; 
+    justify-content: center; 
+    
+    flex-direction: column;
+}
+.headtext .h2{
+  margin-right: 50px ;
+  margin-bottom: 20px;
+  font-size: 40px;
+   font-family: "Barriecito", system-ui;
+}
+.headtext .h5{
+  margin-left: 100px ;
+font-family: "Schoolbell", cursive;
+font-size: 30px;
+margin-bottom: 40px;
+}
+.headtext h2, h5{
+  color: #f1e8be;
+}
+
+.btn{
+  background-color: #95b1f3;
+  display: flex; 
+  text-decoration: none;
+  color: #000000;
+  justify-content: center; 
+  align-items: center;
+  border: 2px solid black;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  font-family: "Aubrey", system-ui;
+  transition: background-color 0.3s ease , color 0.3s ease, border 0.3s ease;
+}
+.btn:hover{
+  background-color: rgb(46, 44, 44);
+  color: white;
+  border: 2px solid white;
+  margin: 0;
+  grid-area: main;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+/* main */
