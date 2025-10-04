@@ -32,7 +32,11 @@
     <div>
        <ul class="nav-links" >
     <li ><a class="anchor" href="{{ url_for('main.index') }}">Home</a></li>
-    <li ><a class="anchor" href="{{url_for('main.Todo')}}">ToDo</a></li> 
+      {% if username %}   
+        <li><a  href="{{url_for('main.Todo')}}" class="anchor" ><p>Todo </p></a></li>
+       {% else %}
+        <li><a  href="{{url_for('main.Login')}}" class="anchor" ><p>Todo </p></a></li>
+        {% endif %}     
     <li ><a class="anchor" href="#">History</a></li>
     <li ><a class="anchor" href="{{ url_for('main.Login') }}">Log-in</a></li>
     
@@ -61,8 +65,11 @@
             <h5>goal, and idea. Start managing your</h5>
               <h5>to-do list the smarter way.</h5>
         </div>
-          
+       {% if username %}   
         <a  href="{{url_for('main.Todo')}}" class="btn" ><p>Let's Start &#8594;</p></a>
+       {% else %}
+        <a  href="{{url_for('main.Login')}}" class="btn" ><p>Let's Start &#8594;</p></a>
+        {% endif %}     
       </div>
     </div>
     
