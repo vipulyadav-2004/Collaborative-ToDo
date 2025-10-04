@@ -24,11 +24,9 @@
             </h1>
     </div>
     
-    {% if username %}
-    <div class="greeting">
-        <h3 style="color: #c8dcdf; font-size: 1.2em; margin-right: 20px;">Hi, {{ username }}!</h3>
-    </div>
-   {% endif %}
+  
+
+
     <div>
        <ul class="nav-links" >
     <li ><a class="anchor" href="{{ url_for('main.index') }}">Home</a></li>
@@ -38,7 +36,13 @@
         <li><a  href="{{url_for('main.Login')}}" class="anchor" ><p>Todo </p></a></li>
         {% endif %}     
     <li ><a class="anchor" href="#">History</a></li>
-    <li ><a class="anchor" href="{{ url_for('main.Login') }}">Log-in</a></li>
+    {% if session.username %}
+    <li><a class="anchor">Hi, {{ session.username }}!</a></li>
+    <li><a class="anchor" href="{{ url_for('main.Logout') }}">Logout</a></li>
+    {% else %}
+    <li><a class="anchor" href="{{ url_for('main.Login') }}">Log-in</a></li>
+    {% endif %}
+
     
     <li ><button class="anchor-acc"></button></li> 
 </ul>
@@ -46,7 +50,15 @@
 </div>
 </div>
 
-    
+     {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
   {% block content %}
 

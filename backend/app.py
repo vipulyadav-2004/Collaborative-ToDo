@@ -37,6 +37,13 @@ def Login():
             flash('Login unsuccessful. Please check username and password.', 'danger')
     return render_template('login.html', title='Login', form=form)
 
+@main.route('/Logout')
+def Logout():
+    session.pop('username', None)
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('main.index'))
+    
+
 @main.route('/Todo')
 def Todo():
     return render_template('todo.html', title='Todo')
