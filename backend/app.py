@@ -37,6 +37,20 @@ def Login():
             flash('Login unsuccessful. Please check username and password.', 'danger')
     return render_template('login.html', title='Login', form=form)
 
+<<<<<<< HEAD
 @main_blueprint.route('/Todo')
+=======
+@main.route('/Logout')
+def Logout():
+    session.pop('username', None)
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('main.index'))
+
+@main.route('/History', methods=['GET','POST'])
+def History():
+    return render_template('history.html' , title = 'History')
+
+@main.route('/Todo')
+>>>>>>> 5f242e70f30ccf5b46f6a52b0298674612bda889
 def Todo():
     return render_template('todo.html', title='Todo')
