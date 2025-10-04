@@ -1,0 +1,6 @@
+{% extends 'index.html' %}
+ <title>{% block title %} History {% endblock %}</title>
+    {% block links %}
+    {{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/todo.css') }}">
+{% endblock %} 

@@ -35,7 +35,11 @@
        {% else %}
         <li><a  href="{{url_for('main.Login')}}" class="anchor" ><p>Todo </p></a></li>
         {% endif %}     
-    <li ><a class="anchor" href="#">History</a></li>
+     {% if username %}   
+        <li><a  href="{{url_for('main.History')}}" class="anchor" ><p>History </p></a></li>
+       {% else %}
+        <li><a  href="{{url_for('main.Login')}}" class="History" ><p>History </p></a></li>
+        {% endif %}     
     {% if session.username %}
     <li><a class="anchor">Hi, {{ session.username }}!</a></li>
     <li><a class="anchor" href="{{ url_for('main.Logout') }}">Logout</a></li>

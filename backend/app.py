@@ -42,7 +42,10 @@ def Logout():
     session.pop('username', None)
     flash('You have been logged out.', 'success')
     return redirect(url_for('main.index'))
-    
+
+@main.route('/History', methods=['GET','POST'])
+def History():
+    return render_template('history.html' , title = 'History')
 
 @main.route('/Todo')
 def Todo():
