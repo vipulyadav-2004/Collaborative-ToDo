@@ -1,11 +1,10 @@
-// ensure DOM is ready before loading tasks
 document.addEventListener('DOMContentLoaded', loadTask);
 
 function addTask(taskText) {
   const taskList = document.getElementById('taskList');
   const newTask = document.createElement('li');
 
-  // if called from loadTask, use the passed text; otherwise use the input field
+  // if called from loadTask, use the passed text, otherwise use the input field
   if (typeof taskText === 'string' && taskText.length) {
     newTask.textContent = taskText;
   } else {
@@ -38,13 +37,12 @@ function saveTask() {
   const tasks = [];
 
   taskList.querySelectorAll('li').forEach(function (item) {
-    // read only the text node (not the button)
     const first = item.childNodes[0];
     const text = first && first.textContent ? first.textContent.trim() : '';
     if (text) tasks.push(text);
   });
 
-  localStorage.setItem('tasks', JSON.stringify(tasks)); // use key "tasks"
+  localStorage.setItem('tasks', JSON.stringify(tasks)); 
 }
 
 function loadTask() {
