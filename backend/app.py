@@ -5,14 +5,14 @@ from .models import db, User
 from .forms import RegistrationForms, LoginForm
 
 # Create a Blueprint
-main = Blueprint('main', __name__)
+main_blueprint = Blueprint('main', __name__)
 
-@main.route('/')
+@main_blueprint.route('/')
 def index():
     username = session.get('username')
     return render_template('index.html',  username=username)
 
-@main.route('/SignUp', methods=['GET', 'POST'])
+@main_blueprint.route('/SignUp', methods=['GET', 'POST'])
 def Signup():
     form = RegistrationForms()
     if form.validate_on_submit():
@@ -24,7 +24,7 @@ def Signup():
         return redirect(url_for('main.Login'))
     return render_template('signup.html', title='Signup', form=form)
 
-@main.route('/Login', methods=['GET', 'POST'])
+@main_blueprint.route('/Login', methods=['GET', 'POST'])
 def Login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -37,6 +37,6 @@ def Login():
             flash('Login unsuccessful. Please check username and password.', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-@main.route('/Todo')
+@main_blueprint.route('/Todo')
 def Todo():
     return render_template('todo.html', title='Todo')
