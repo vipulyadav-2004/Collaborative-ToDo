@@ -1,36 +1,43 @@
-// backend/static/js/main.js
-
 document.addEventListener('DOMContentLoaded', loadTasksFromServer);
+
+// Get the CSRF token from the meta tag
+const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 async function addTask() {
     const input = document.getElementById('inpu-task');
     const taskContent = input.value.trim();
     if (!taskContent) return;
 
-    // --- Send the new task to the server ---
     const response = await fetch('/add_task', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken // <-- Add this header
+        },
         body: JSON.stringify({ content: taskContent }),
     });
 
     if (response.ok) {
-        const newTask = await response.json(); // Get new task details from server
-        createTaskElement(newTask.content, newTask.id); // Create the UI element
+        const newTask = await response.json();
+        createTaskElement(newTask.content, newTask.id);
         input.value = '';
     } else {
-        alert('Failed to add task.');
+        alert('Failed to add task. You may need to log in again.');
     }
 }
 
 async function deleteTask(taskId, taskElement) {
-    // --- Tell the server to delete the task ---
-    const response = await fetch(`/delete_task/${taskId}`, { method: 'POST' });
+    const response = await fetch(`/delete_task/${taskId}`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken // <-- Add this header
+        }
+    });
 
     if (response.ok) {
-        taskElement.remove(); // Remove from UI if server confirms
+        taskElement.remove();
     } else {
-        alert('Failed to delete task.');
+        alert('Failed to delete task. You may need to log in again.');
     }
 }
 
@@ -46,7 +53,7 @@ function createTaskElement(content, id) {
     const taskList = document.getElementById('taskList');
     const newTask = document.createElement('li');
     newTask.textContent = content;
-    newTask.dataset.id = id; // Store the task ID on the element
+    newTask.dataset.id = id;
 
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = "Delete";

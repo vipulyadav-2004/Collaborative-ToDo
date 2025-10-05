@@ -14,6 +14,7 @@
 
 .history-box{
     margin-top: 40px;
+    margin-bottom: 40px;
     width: 800px;
     height: auto;
     min-height: 100px;
@@ -33,7 +34,7 @@
 .task-box li {
     width: 95%;
     height: 50px;
-    margin: 0 auto 15px; /* Center the box and add space below it */
+ /* Center the box and add space below it */
     background-color: #a8a4a4;
     border-radius: 20px;
     border: 2px solid black;
@@ -81,4 +82,36 @@
 /* Style for COMPLETED tasks (also "not active", but let's give it a distinct color) */
 .task-item-completed .task-status {
     background-color: #6c757d; /* Grey */
+}
+
+/* In backend/static/css/History.css */
+
+.history-delete-btn {
+    background-color: #dc3545; /* Red color */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.history-delete-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+.task-box1{
+     width: 95%;
+    height: 50px;
+    
+    margin: 30px 0px  10px 10px; /* Center the box and add space below it */
+    background-color: #a8a4a4;
+    border-radius: 20px;
+    border: 2px solid black;
+    padding: 15px;
+    font-family: "Aubrey", system-ui;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333333;
 }

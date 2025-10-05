@@ -21,12 +21,18 @@
                         <span class="task-date">{{ task.date_created.strftime('%Y-%m-%d') }}</span>
                         <span class="task-status">{{ task.status }}</span>
                     </div>
+                    <form method="POST" action="{{ url_for('main.delete_history', task_id=task.id) }}">
+                           {{ delete_form.hidden_tag() }}
+                           {{ delete_form.submit(class="history-delete-btn") }}
+                     </form>
                 </li>
                 </div>
             {% endfor %}
         </ul>
     {% else %}
-        <p>You have no task history yet.</p>
+        <div class="task-box1">
+            <p class="task-content1">You have no task history yet.</p>
+        </div>
     {% endif %}
 
   </div>

@@ -2,6 +2,7 @@
     <title>{% block title %} Todo {% endblock %}</title>
     {% block links %}
     {{ super() }}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/todo.css') }}">
 {% endblock %} 
   {% block content %} 

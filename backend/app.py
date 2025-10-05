@@ -1,19 +1,20 @@
-# backend/app.py
+from flask import render_template, url_for, flash, redirect, Blueprint, request, jsonify
+from .models import db, User, Task
+from .forms import RegistrationForms, LoginForm, DeleteTaskForm
+from flask_login import login_user, logout_user, login_required, current_user
 
-from flask import render_template, url_for, flash, redirect, session, Blueprint,request,jsonify
-from .models import db, User ,Task
-from .forms import RegistrationForms, LoginForm
+# The name of the blueprint variable is now 'main' to match the import
+main = Blueprint('main', __name__)
 
-# Create a Blueprint
-main_blueprint = Blueprint('main', __name__)
-
-@main_blueprint.route('/')
+@main.route('/')
 def index():
-    username = session.get('username')
-    return render_template('index.html',  username=username)
+    # No need to pass username; current_user is available in all templates
+    return render_template('index.html')
 
-@main_blueprint.route('/SignUp', methods=['GET', 'POST'])
+@main.route('/SignUp', methods=['GET', 'POST'])
 def Signup():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
     form = RegistrationForms()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
@@ -24,77 +25,79 @@ def Signup():
         return redirect(url_for('main.Login'))
     return render_template('signup.html', title='Signup', form=form)
 
-@main_blueprint.route('/Login', methods=['GET', 'POST'])
+@main.route('/Login', methods=['GET', 'POST'])
 def Login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_password(form.password.data):
-            session['username'] = user.username
+            # Use login_user to manage the session and "Remember Me"
+            login_user(user, remember=form.remember.data)
             flash('You have been logged in successfully.', 'success')
             return redirect(url_for('main.index'))
         else:
             flash('Login unsuccessful. Please check username and password.', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-
-@main_blueprint.route('/Logout')
+@main.route('/Logout')
+@login_required # Protect this route
 def Logout():
-    session.pop('username', None)
+    logout_user() # Use logout_user to properly clear the session
     flash('You have been logged out.', 'success')
     return redirect(url_for('main.index'))
 
-@main_blueprint.route('/Todo')
+@main.route('/Todo')
+@login_required # Protect this route
 def Todo():
-    # Get the username from the session
-    username = session.get('username')
-    # Pass it to the template
-    return render_template('todo.html', title='Todo', username=username)
+    return render_template('todo.html', title='Todo')
 
-@main_blueprint.route('/History', methods=['GET','POST'])
+@main.route('/History', methods=['GET','POST'])
+@login_required # Protect this route
 def History():
-    if 'username' in session:
-        # Get the username from the session
-        username = session.get('username') 
-        user = User.query.filter_by(username=username).first()
-        # Pass the username to the template
-        return render_template('history.html', title='Task History', tasks=user.tasks, username=username)
-    else:
-        flash('You need to be logged in to see your history.', 'danger')
-        return redirect(url_for('main.Login'))
-  
-@main_blueprint.route('/get_tasks')
+    tasks = Task.query.filter_by(author=current_user).order_by(Task.date_created.desc()).all()
+    delete_form = DeleteTaskForm()
+    return render_template('history.html', title='Task History', tasks=tasks, delete_form=delete_form)
+
+# --- TASK API ROUTES ---
+
+@main.route('/get_tasks')
+@login_required
 def get_tasks():
-    if 'username' not in session:
-        return jsonify([])
-    user = User.query.filter_by(username=session['username']).first()
-    tasks = Task.query.filter_by(author=user, status='active').all()
+    tasks = Task.query.filter_by(author=current_user, status='active').all()
     return jsonify([{'id': task.id, 'content': task.content} for task in tasks])
 
-@main_blueprint.route('/add_task', methods=['POST'])
+@main.route('/add_task', methods=['POST'])
+@login_required
 def add_task():
-    if 'username' not in session:
-        return jsonify({'error': 'Not logged in'}), 401
-    
     data = request.get_json()
-    user = User.query.filter_by(username=session['username']).first()
-    
-    new_task = Task(content=data['content'], author=user)
+    new_task = Task(content=data['content'], author=current_user)
     db.session.add(new_task)
     db.session.commit()
-    
     return jsonify({'id': new_task.id, 'content': new_task.content})
 
-@main_blueprint.route('/delete_task/<int:task_id>', methods=['POST'])
+@main.route('/delete_task/<int:task_id>', methods=['POST'])
+@login_required
 def delete_task(task_id):
-    if 'username' not in session:
-        return jsonify({'error': 'Not logged in'}), 401
-
     task_to_delete = Task.query.get(task_id)
-    if task_to_delete and task_to_delete.author.username == session['username']:
-        # We change the status instead of deleting forever
+    if task_to_delete and task_to_delete.author == current_user:
         task_to_delete.status = 'deleted'
         db.session.commit()
         return jsonify({'message': 'Task marked as deleted'})
-    
     return jsonify({'error': 'Task not found or unauthorized'}), 404
+
+@main.route('/delete_history/<int:task_id>', methods=['POST'])
+@login_required
+def delete_history(task_id):
+    task_to_delete = Task.query.get(task_id)
+    if not task_to_delete:
+        flash('Task history not found.', 'danger')
+        return redirect(url_for('main.History'))
+    if task_to_delete.author != current_user:
+        flash('You are not authorized to delete this task.', 'danger')
+        return redirect(url_for('main.History'))
+    db.session.delete(task_to_delete)
+    db.session.commit()
+    flash('Task history permanently deleted.', 'success')
+    return redirect(url_for('main.History'))
