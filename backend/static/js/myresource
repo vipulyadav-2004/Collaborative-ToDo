@@ -1,4 +1,4 @@
-loadTask();
+/* loadTask();
 function addTask(){
   const newTask = document.createElement('li');
   const taskList = document.getElementById('taskList');
@@ -29,4 +29,4 @@ function saveTask() {
 function loadTask(){
   const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
   tasks.forEach(addTask)
-}
+} */

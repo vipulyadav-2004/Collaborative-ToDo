@@ -1,51 +1,60 @@
-document.addEventListener('DOMContentLoaded', loadTask);
+// backend/static/js/main.js
 
-function addTask(taskText) {
-  const taskList = document.getElementById('taskList');
-  const newTask = document.createElement('li');
+document.addEventListener('DOMContentLoaded', loadTasksFromServer);
 
-  // if called from loadTask, use the passed text, otherwise use the input field
-  if (typeof taskText === 'string' && taskText.length) {
-    newTask.textContent = taskText;
-  } else {
+async function addTask() {
     const input = document.getElementById('inpu-task');
-    const value = input.value.trim();
-    if (!value) return; // don't add empty tasks
-    newTask.textContent = value;
-    input.value = '';
-  }
+    const taskContent = input.value.trim();
+    if (!taskContent) return;
 
-  taskList.appendChild(newTask);
-  deleteTask(newTask);
-  saveTask(); // update storage after adding
+    // --- Send the new task to the server ---
+    const response = await fetch('/add_task', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: taskContent }),
+    });
+
+    if (response.ok) {
+        const newTask = await response.json(); // Get new task details from server
+        createTaskElement(newTask.content, newTask.id); // Create the UI element
+        input.value = '';
+    } else {
+        alert('Failed to add task.');
+    }
 }
 
-function deleteTask(newTask) {
-  const deletebtn = document.createElement('button');
-  deletebtn.textContent = "Delete";
-  deletebtn.classList.add("delete-btn");
-  newTask.appendChild(deletebtn);
+async function deleteTask(taskId, taskElement) {
+    // --- Tell the server to delete the task ---
+    const response = await fetch(`/delete_task/${taskId}`, { method: 'POST' });
 
-  deletebtn.onclick = function () {
-    newTask.remove();
-    saveTask(); // update storage after deleting
-  }
+    if (response.ok) {
+        taskElement.remove(); // Remove from UI if server confirms
+    } else {
+        alert('Failed to delete task.');
+    }
 }
 
-function saveTask() {
-  const taskList = document.getElementById('taskList');
-  const tasks = [];
-
-  taskList.querySelectorAll('li').forEach(function (item) {
-    const first = item.childNodes[0];
-    const text = first && first.textContent ? first.textContent.trim() : '';
-    if (text) tasks.push(text);
-  });
-
-  localStorage.setItem('tasks', JSON.stringify(tasks)); 
+async function loadTasksFromServer() {
+    const response = await fetch('/get_tasks');
+    if (response.ok) {
+        const tasks = await response.json();
+        tasks.forEach(task => createTaskElement(task.content, task.id));
+    }
 }
 
-function loadTask() {
-  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-  tasks.forEach(taskText => addTask(taskText));
+function createTaskElement(content, id) {
+    const taskList = document.getElementById('taskList');
+    const newTask = document.createElement('li');
+    newTask.textContent = content;
+    newTask.dataset.id = id; // Store the task ID on the element
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "Delete";
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.onclick = function () {
+        deleteTask(id, newTask);
+    };
+
+    newTask.appendChild(deleteBtn);
+    taskList.appendChild(newTask);
 }

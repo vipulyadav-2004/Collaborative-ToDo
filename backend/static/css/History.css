@@ -1,0 +1,84 @@
+.main{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    
+}
+
+.para{
+    color: #f1e8be;
+    margin-top: 40px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.history-box{
+    margin-top: 40px;
+    width: 800px;
+    height: auto;
+    min-height: 100px;
+    background-color: #4e4e4e;
+    border-radius: 20px;
+    border: 3px solid #aca9a9 ;
+    padding-bottom: 20px;
+    
+}
+.task-box {
+    list-style: none; /* Removes the bullet points */
+    padding: 20px;
+    margin: 0;
+}
+
+/* This is the individual <li> for each task item */
+.task-box li {
+    width: 95%;
+    height: 50px;
+    margin: 0 auto 15px; /* Center the box and add space below it */
+    background-color: #a8a4a4;
+    border-radius: 20px;
+    border: 2px solid black;
+    padding: 15px;
+    font-family: "Aubrey", system-ui;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333333;
+
+    /* --- FLEXBOX FIXES --- */
+    display: flex; /* Treats the list item as a flex container */
+    justify-content: space-between; /* Pushes children to the edges */
+    align-items: center; /* Vertically centers the children */
+}
+
+/* Optional: Add a style for the content to take up remaining space */
+.task-content {
+    flex-grow: 1; /* Allows the task content to take up any available space */
+}
+
+.task-box .task-date{
+    color: rgb(126, 41, 41);
+    margin-right: 30px;
+}
+
+.task-status {
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: white;
+    min-width: 80px; /* Ensures uniform width */
+    text-align: center;
+}
+
+/* Style for ACTIVE tasks */
+.task-item-active .task-status {
+    background-color: #28a745; /* Green */
+}
+
+/* Style for DELETED tasks (counts as "not active") */
+.task-item-deleted .task-status {
+    background-color: #dc3545; /* Red */
+}
+
+/* Style for COMPLETED tasks (also "not active", but let's give it a distinct color) */
+.task-item-completed .task-status {
+    background-color: #6c757d; /* Grey */
+}

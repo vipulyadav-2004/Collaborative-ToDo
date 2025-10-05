@@ -6,6 +6,7 @@
   <title>{% block title %} My 2Du {% endblock %}</title>
   {% block links %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Uncial+Antiqua&display=swap" rel="stylesheet">
@@ -37,9 +38,7 @@
         {% endif %}     
      {% if username %}   
         <li><a  href="{{url_for('main.History')}}" class="anchor" ><p>History </p></a></li>
-       {% else %}
-        <li><a  href="{{url_for('main.Login')}}" class="History" ><p>History </p></a></li>
-        {% endif %}     
+       {% endif %}     
     {% if session.username %}
     <li><a class="anchor">Hi, {{ session.username }}!</a></li>
     <li><a class="anchor" href="{{ url_for('main.Logout') }}">Logout</a></li>

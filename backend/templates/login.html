@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title> 
+
     <style>
         /* CSS Styles (Keep them identical for both pages for consistency) */
         body {
@@ -37,6 +38,10 @@
             text-align: center;
             margin-bottom: 5px;
             color: #333;
+        }
+        .form-header h5{
+          color: red;
+          font-family: Arial, Helvetica, sans-serif;
         }
         
         .form-header p {
@@ -146,6 +151,7 @@
             border: 1px solid #f5c6cb;
         }
     </style>
+    
 </head>
 <body>
 <div class="body">
@@ -154,6 +160,7 @@
             <div class="form-header">
                 <h2>Welcome Back</h2>
                 <p>Enter your credentials to access your account.</p>
+                <h5 class="text-primary">NOTE: Don't use your real mail account as this is only a project wesite and if you forgot the password , Don't worry again sign up with you new data .</h5>
             </div>
     
             <form method="POST" action="{{ url_for('main.Login') }}">
