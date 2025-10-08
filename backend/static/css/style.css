@@ -24,14 +24,12 @@ body {
     width: 100%;
     grid-area: header;
     background: linear-gradient(135deg, #1e2423, #000000);
-    transition: background-color 1s ease-in;
-    display: flex; /* Use flexbox for the main header items */
-    justify-content: space-between; /* Push the logo/title group and nav-links group to the edges */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 20px; /* Add general padding */
-     position: fixed;
-    
-    
+    padding: 0 20px;
+    position: fixed;
+    z-index: 10; /* Ensures header stays on top */
 }
 
 /* 💡 New: Container for Logo and Title */
