@@ -108,3 +108,43 @@ input{
     background-color: #464646;
   
 }
+@media (max-width: 768px) {
+  .para, .to-do {
+    /* Make containers fluid */
+    width: 80%; 
+  }
+
+  .para {
+    font-size: 15px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .add-task {
+    flex-direction: column; 
+    align-items: center;/* Stack input and button vertically */
+    gap: 10px;
+  }
+
+  input {
+    width: 80%; /* Make input take full width of its container */
+    margin-left: 0;
+  }
+
+  .add-btn {
+    width: 30%;
+    height: 30px; /* Make button take full width */
+  }
+
+  .task-list li {
+    flex-direction: column; /* Stack task content and delete button */
+    align-items: flex-start;
+    gap: 10px;
+    height: 30px;
+  }
+
+  .delete-btn {
+    margin-top: -34px;
+    align-self: flex-end; /* Move delete button to the right */
+  }
+}

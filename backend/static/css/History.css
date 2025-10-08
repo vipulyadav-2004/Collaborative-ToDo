@@ -115,3 +115,19 @@
     font-weight: bold;
     color: #333333;
 }
+@media (max-width: 768px) {
+  .para, .to-do {
+    /* Make containers fluid */
+    width: 80%; 
+  }
+
+  .para {
+    text-align: center;
+    font-size: 15px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+ .history-box{
+    width: 500px;
+ }
+}
