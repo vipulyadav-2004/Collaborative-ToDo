@@ -29,8 +29,9 @@
 }
 
 .about-content {
+
   flex: 1;
-  max-width: 600px;
+  max-width: 700px;
 }
 
 .about-content h1 {
@@ -88,6 +89,11 @@
   flex-wrap: wrap;
 }
 
+.social-links .dev{
+padding: 0.55rem 0.3rem;
+
+text-align: center;
+}
 .social-link {
   text-decoration: none;
   color: white;
