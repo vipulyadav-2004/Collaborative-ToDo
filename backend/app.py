@@ -101,3 +101,9 @@ def delete_history(task_id):
     db.session.commit()
     flash('Task history permanently deleted.', 'success')
     return redirect(url_for('main.History'))
+
+#new changes for about
+@main.route('/about')
+def about():
+    # This tells Flask to find and return the about.html file from the 'templates' folder
+    return render_template('about.html')

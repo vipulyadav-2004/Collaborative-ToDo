@@ -1,3 +1,4 @@
+
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -18,7 +19,7 @@ class User(db.Model, UserMixin): # Inherit from UserMixin
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def __repr__(self):
+    def _repr_(self):
         return f"User('{self.username}', '{self.email}')"
 
 class Task(db.Model):
@@ -28,5 +29,5 @@ class Task(db.Model):
     status = db.Column(db.String(20), nullable=False, default='active')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def __repr__(self):
-        return f'<Task {self.id}>'
+    def _repr_(self):
+        return f'<Task {self.id}>'

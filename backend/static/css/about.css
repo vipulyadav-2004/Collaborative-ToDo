@@ -1,0 +1,343 @@
+body{
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+}
+.container{
+  height: 100vh;
+  width: 100%;
+  background-color:#1A1A1A;
+  background: linear-gradient(135deg, #1e2423, #000000);
+  
+}
+.main-header {
+    width: 100%;
+    grid-area: header;
+    background: linear-gradient(135deg, #1e2423, #000000);
+    transition: background-color 1s ease-in;
+    display: flex; /* Use flexbox for the main header items */
+    justify-content: space-between; /* Push the logo/title group and nav-links group to the edges */
+    align-items: center;
+    padding: 0 20px; /* Add general padding */
+    /*position: fixed;*/
+    
+    
+}
+
+/* 💡 New: Container for Logo and Title */
+.main-header > div:first-child {
+  
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+  height: auto;
+  display: inline-block;
+  width: 70px;
+  
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.heading{
+   
+  margin-top: 0;
+  display: inline-block;
+  align-self: center;
+  font-size: 30px;
+  font-family: sans-serif;
+  font-style:inherit;
+  font-weight: 700;
+  /*color: rgb(11, 92, 180);*/
+  color: #f1e8be;
+}
+.d-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.tick {
+  background-color: none;
+  position: absolute;
+  top: 0.06rem;
+  left: 0.02em;
+  font-size: 1.2em;
+  transform: rotate(10deg);
+ text-shadow: none;
+ 
+}
+
+.nav-links {
+    /* Removed fixed width to allow flex properties to work */
+    height: 100%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    /* Use gap for spacing between links */
+    gap: 40px; 
+    margin: 0; /* Remove default margin */
+}
+
+.nav-links li {
+    /* Remove unnecessary width/centering to allow links to size content */
+    display: flex; 
+    width: auto;
+    padding: 5px 0; /* Add vertical padding for hover area */
+}
+
+.anchor {
+    /* Remove fixed width, let content determine size */
+    width: auto; 
+    padding: 6px 12px; /* Padding for better hover target */
+    font-size: 20px;
+    text-decoration: none;
+    color: #f1e8be;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    border-radius: 10px; /* Rounded corners for hover effect */
+}
+.anchor-acc {
+    /* Use inline-flex to center the 'A' text perfectly */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: auto;
+    height: 40px;
+    font-size: 20px;
+    border: 1px solid #6b99f5;
+    color: #0D224B; /* Dark text color */
+    font-weight: 400;
+    border-radius: 5px;
+    /* Remove padding: 7px; since width/height handle size */
+    background-color: #729af8;
+    transition:background-color 0.3s, border-radius 0.3s;
+    cursor: pointer;
+}
+.anchor-acc:hover {
+    background-color: #f5f5f5; /* Subtle hover effect */
+    border-radius: 20px;
+}
+.anchor:hover {
+    background-color: rgba(146, 146, 173, 0.205); 
+    color: white;
+    
+}
+/*new part*/
+
+.about-us{
+  background-color: rgb(195, 195, 160);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: auto;
+  border-radius: 50px;
+  margin: 10px 90px;
+}
+.about-head{
+  height: 200px;
+  width: 60%;
+ 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  
+}
+
+.about-head p{
+  font-size: 20px;
+  text-align: center;
+}
+.heading-about{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.heading-about:hover{
+  cursor: pointer;
+}
+img{
+  border-radius: 10px;
+}
+
+.about-us2{
+  margin-top: 10px;
+background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+color: #f1e8be ;
+  display: flex;
+  align-items: center;
+  justify-content: space-between ;
+  height: auto;
+}
+
+.contact-us-img{
+   border: 4px solid #f1e8be; /* A subtle, warm border color matching your text */
+  border-radius: 10px;       /* Slightly rounded corners to match the image style */
+  padding: 5px;              /* Some padding inside the border */
+
+  /* Shadow */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), /* Main shadow: horizontal, vertical, blur, color */
+              0 0 0 10px rgba(255, 255, 255, 0.1); /* An optional, subtle outer glow */
+
+  /* Animation (Hover Effect) */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions */
+}
+.contact-us-img:hover{
+  transform: scale(1.05) translateY(-5px); /* Slightly enlarge and lift the image */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6), /* Stronger shadow on hover */
+              0 0 0 12px rgba(255, 255, 255, 0.2);
+}
+.contact-us{
+   text-align: center;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-left: 100px;
+}
+.contact-heading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-us p{
+  font-size: 20px;
+  text-align: center;
+
+}
+
+.contact-insta {
+  background-color: #111;
+  color: rgb(222, 222, 187); /* Instagram pink */
+  border: 1px solid #e1306c;
+  border-radius: 13px;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px rgba(225,48,108,0.3);
+  transition: all 0.4s ease-in;
+}
+.contact-insta:hover {
+  background-color: #e1306c;
+  color: white;
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+.contact-fb {
+  background-color: #111;
+  color: #1877f2;
+  border: 1px solid #1877f2;
+  padding: 10px 20px;
+  line-height: 100px;
+  border-radius: 13px;
+  
+}
+.contact-fb:hover {
+  background-color: #1877f2;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(24,119,242,0.6);
+  cursor: pointer;
+}
+/*gmail*/
+.contact-gmail {
+  background-color: #111;
+  color: #ea4335;
+  border: 1px solid #ea4335;
+  padding: 10px 20px;
+  border-radius: 13px;
+}
+.contact-gmail:hover {
+  background-color: #ea4335;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(234,67,53,0.6);
+  cursor: pointer;
+}
+/* 🟣 Discord */
+.contact-discord {
+  background-color: #111;
+  color: #5865f2;
+  border: 1px solid #5865f2;
+  padding: 10px 20px;
+  line-height: 100px;
+  border-radius: 13px;
+}
+.contact-discord:hover {
+  background-color: #5865f2;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(88,101,242,0.6);
+  cursor: pointer;
+}
+
+.about-li{
+  list-style: none;
+  
+}
+.img-container {
+  margin-left: 20px;
+  width: 400px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 20px;     /* optional rounded corners */
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* fills div but may crop edges */
+}
+
+/*our service*/
+
+.service{
+  background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+  color: #f1e8be;
+  height: auto;
+  font-size: 16px;
+  
+}
+.service-head{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-left: 100px;
+  font-size: 18px;
+  word-spacing: 1.5px;
+}
+.service-head li{
+  line-height: 30px;
+}
+#some{
+  padding-bottom: 0;
+  margin: 0;
+}
+.service-heading{
+  text-align: center;
+  background-color: #1f1f1f;
+  display: inline-block ;
+  
+  
+  }
+/*privaxy*/
+.privacy{
+  margin-top: 0;
+  background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+  color: #f1e8be;
+  height: auto;
+  font-size: 16px;
+  
+}
+.privacy-head{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-left: 100px;
+  font-size: 18px;
+  word-spacing: 1.5px;
+}
+
+/*terms cobd*/
+.terms{
+  background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+  color: #f1e8be;
+  height: auto;
+  font-size: 16px;
+  
+}
+.terms-head{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-left: 100px;
+  font-size: 18px;
+  word-spacing: 1.5px;
+}
