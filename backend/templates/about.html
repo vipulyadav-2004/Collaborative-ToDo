@@ -1,141 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>about</title>
+{% extends 'index.html' %}
+
+{% block title %} About Us {% endblock %}
+
+{% block links %}
+  {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
-</head>
-<body>
-  <div class="container">
-    <div class="main-header">
-      <div>
-        <img class="logo" src="{{url_for('static' , filename='images/logo.png')}}" alt="logo">
-        <h1 class="heading">My 2<span class="d-wrap">D<span class="tick">&#10003;</span></span></h1>
+{% endblock %} 
+
+{% block content %}
+<div class="main">
+  <div class="about-container">
+  
+    <section id="about" class="about-section">
+      <div class="about-content">
+        <h1>About My 2Du</h1>
+        <p>Welcome! My 2Du is a user-centric to-do list application designed to help you clear your head, organize your day, and focus on what matters most. Our goal is to provide a clean, efficient, and secure space for you to manage your tasks without distraction.</p>
       </div>
-
-      <div>
-        <ul class="nav-links">
-          <li><a class="anchor" href="{{ url_for('main.index') }}">Home</a></li>
-          <li><a href="{{url_for('main.Todo')}}" class="anchor"><p>Todo</p></a></li>
-
-          {% if current_user.is_authenticated %}
-            <li><a href="{{url_for('main.History')}}" class="anchor"><p>History</p></a></li>
-            <li><a class="anchor">Hi, {{ current_user.username }}!</a></li>
-            <li><a class="anchor" href="{{ url_for('main.Logout') }}">Logout</a></li>
-          {% else %}
-            <li><a class="anchor" href="{{ url_for('main.Login') }}">Log-in</a></li>
-          {% endif %}
-          
-          <li><button class="anchor-acc"></button></li>
+      <div class="about-image">
+        <img src="{{ url_for('static', filename='images/sticker.png') }}" alt="Productivity Sticker">
+      </div>
+    </section>
+  
+    <section id="services" class="about-section reverse">
+      <div class="about-content">
+        <h2>Our Services</h2>
+        <p>We provide a suite of features to enhance your productivity:</p>
+        <ul>
+          <li><strong>Task Management:</strong> Easily add, edit, and manage tasks to keep your to-do list current.</li>
+          <li><strong>User Accounts:</strong> Sign up for a free account to securely save and access your tasks from anywhere.</li>
+          <li><strong>Task History:</strong> A dedicated section to review your completed and deleted tasks to track your progress.</li>
+          <li><strong>Clean Interface:</strong> A minimalist design ensures you can focus on getting things done.</li>
         </ul>
       </div>
+      <div class="about-image">
+          <img src="{{ url_for('static', filename='images/bkg.png') }}" alt="Services Icon">
       </div>
-      <!--new part-->
-      <div class="about-main">
-        <div class="about-us">
-      <div class="about-head">
-        <h1 class="heading-about"><strong>About Us</strong> </h1>
-      <p>Thank you for using My 2D! This page provides important information about our services, our commitment to your privacy, and the terms that govern your use of our application.</p>
-      <p>Last Updated: October 5, 2025</p>
-    </div> 
-    
-    <img src="{{url_for('static' , filename='images/sticker.png')}}" alt="sticker" height="200px" width="150px">
-    
-    </div>
-
-      </div>
-      <div class="about-us2">
-        
-        <div class="img-container">
-          <img src="{{url_for('static' , filename='images/contact-us.png')}}" alt="sticker" height="250px" width="400px" class="contact-us-img">
-        </div>
-        <div class="contact-us">
-          <h1 class="contact-heading"><strong>Contact Us</strong></h1>
-          <p>We value your feedback and are here to help with any questions or concerns you may have. Whether you have a suggestion, a support request, or just want to say hello, we'd love to hear from you.</p>
-          <p> For all inquiries, please reach out to us at </p>
-          <ul class="about-li">
-          <li><a class="contact-insta">Instagram</a></li>
-          <li><a class="contact-fb">Facebook</a></li>
-          <li><a class="contact-gmail">G-mail</a></li>
-          <li><a class="contact-discord">Discord</a></li>
-          </ul>
-
+    </section>
+  
+    <section id="contact" class="about-section">
+      <div class="about-content">
+        <h2>Contact Us</h2>
+        <p>We value your feedback and are here to help. Whether you have a suggestion, a support request, or just want to say hello, we'd love to hear from you. For all inquiries, please reach out to us through our social channels.</p>
+        <div class="social-links">
+          <a href="#" class="social-link instagram">Instagram</a>
+          <a href="#" class="social-link facebook">Facebook</a>
+          <a href="#" class="social-link gmail">G-mail</a>
+          <a href="#" class="social-link discord">Discord</a>
         </div>
       </div>
-      <div class="service">
-        <div class="service-head">
-          <h1 class="service-heading"><strong>&#8658; Our Service</strong></h1>
-          <p> &#8674; My 2D is a straightforward, user-centric to-do list application designed to help you clear your head and organize your day. Our goal is to provide a clean and efficient space for you to manage your tasks, goals, and ideas without distraction.
-          <ul>
-            <li><strong> Task Management:</strong> Easily add, edit, complete, and delete tasks to keep your to-do list current and manageable.</li>
-            <li><strong>User Accounts:</strong> Sign up for a free account to securely save and access your tasks from any device with a web browser.</li>
-            <li><strong>Clean & Intuitive Interface:</strong>Our minimalist design ensures that you can focus on what matters most—getting things done.</li>
-            <li><strong>Task History:</strong>A dedicated section to review your completed tasks and track your productivity over time.</li>
-          </ul>
-          <p id="some">&#8674; We are committed to continuously improving My 2D and adding features that help you achieve your goals.</p>
-</p>
-        </div>
+      <div class="about-image">
+        <img src="{{ url_for('static', filename='images/contact-us.png') }}" alt="Contact Us Graphic" class="contact-us-img">
       </div>
-    <div class="privacy">
-      <div class="privacy-head">
-          <h1 class="service-heading"><strong>&#8658; Privacy Policy</strong></h1>
-          <p>&#8674; Your privacy is critically important to us. This Privacy Policy outlines the types of information we collect and how we use and protect it.</p>
-          <p><strong>a. Information We Collect:</strong><br>
-
-          <br>&#8702; Personal Information:  When you register for an account, we collect your username and email address. This information is used for account identification, password resets, and essential service communications.
-          <br>&#8702; Your To-Do List Data: We store the tasks you create within your account. This data is yours, and we treat it as confidential. 
-          <br>&#8702; Usage Data: We may collect non-personal, anonymous data about how you interact with our service (e.g., features used) to help us improve the application.
-          </p>
-          <p><strong>b. How We Use Your Information*</strong><br>
-
-          <br>&#8702; To Provide the Service: Your information is used to operate and maintain your account and to save your to-do lists.
-          <br>&#8702; To Improve Our Service:* We analyze usage patterns to understand what features are most helpful and to guide future development.
-          <br>&#8702; To Communicate With You:* We may use your email address to send important service-related notifications or to respond to your support requests.
-          </p>
-          <p><strong>c. Data Security</strong><br>
-
-
-          <br>&#8702 implement reasonable security measures to protect your personal information from unauthorized access, use, or disclosure. However, no method of transmission over the Internet is 100% secure, and we cannot guarantee its absolute security.
-
-        </p>
-    </div>
+    </section>
+  
+    <section id="privacy" class="legal-section">
+      <h2>Privacy Policy</h2>
+      <p>Your privacy is critically important to us. When you register, we collect your username and email for account identification. Your to-do list data is yours, and we treat it as confidential. We do not share your personal information with third parties.</p>
+    </section>
+  
+    <section id="terms" class="legal-section">
+      <h2>Terms & Conditions</h2>
+      <p>By creating an account with My 2Du, you agree to be bound by our terms. You are responsible for safeguarding your password and for all activities that occur under your account. The service is provided "AS IS," and we are not liable for any damages arising from its use.</p>
+    </section>
+  
   </div>
-    <div class="terms">
-      <div class="terms-head">
-          <h1 class="terms-heading"><strong>&#8658; Terms & Conditions</strong></h1>
-          <p>&#8674;  creating an account and using the My 2D application ("Service"), you agree to be bound by the following terms and conditions ("Terms").</p>
-          <p><strong>a. User Accounts</strong><br>
-
-          <br>&#8702; are responsible for safeguarding your password and for all activities that occur under your account.
-          <br>&#8702; You must provide accurate and complete information during the registration process.
-          <br>&#8702; You agree not to use the Service for any illegal or unauthorized purpose.
-          </p>
-          <p><strong>b. Content</strong><br>
-
-          <br>&#8702;  You are solely responsible for the content (your tasks and to-do lists) that you create and store using the Service. We do not monitor your content.
-          <br>&#8702; YoYou agree not to post content that is unlawful, harmful, or otherwise objectionable.
-          </p>
-          <p><strong>c. Termination</strong><br>
-
-          <br>&#8702;  We reserve the right to suspend or terminate your account at any time, without prior notice, if you violate these Terms.
-          <br>&#8702; You can delete your account at any time by contacting our support team.
-
-          </p>
-          <p><strong>d. Limitation of Liability</strong><br>
-
-          <br>&#8702; The Service is provided on an "AS IS" and "AS AVAILABLE" basis. My 2D makes no warranties, express or implied, and hereby disclaims and negates all other warranties. In no event shall My 2D be liable for any damages (including, without limitation, damages for loss of data or profit) arising out of the use or inability to use the Service.
-          </p>
-          <p><strong>e. Changes to Terms</strong><br>
-
-          <br>&#8702;We reserve the right to modify these Terms at any time. We will notify you of any changes by posting the new Terms on this page. Your continued use of the Service after any such changes constitutes your acceptance of the new Terms.
-          </p>
-           <p><strong>f. Governing Law</strong><br>
-
-          <br>&#8702;These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions.
-          </p>
-        </div>
-  </div>
-  </div>
-</body>
-</html> 
+</div>
+{% endblock %}

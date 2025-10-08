@@ -15,62 +15,58 @@
 </head>
 <body>
 
-  <div class="container">
-    <div class="main-header">
-      <div>
-        <img class="logo" src="{{url_for('static' , filename='images/logo.png')}}" alt="logo">
-        <h1 class="heading">My 2<span class="d-wrap">D<span class="tick">&#10003;</span></span></h1>
-      </div>
-
-      <div>
-        <ul class="nav-links">
-          <li><a class="anchor" href="{{ url_for('main.index') }}">Home</a></li>
-          <li><a href="{{url_for('main.Todo')}}" class="anchor"><p>Todo</p></a></li>
-
-          {% if current_user.is_authenticated %}
-            <li><a href="{{url_for('main.History')}}" class="anchor"><p>History</p></a></li>
-            <li><a class="anchor">Hi, {{ current_user.username }}!</a></li>
-            <li><a class="anchor" href="{{ url_for('main.Logout') }}">Logout</a></li>
-          {% else %}
-            <li><a class="anchor" href="{{ url_for('main.Login') }}">Log-in</a></li>
-          {% endif %}
-          
-          <li><button class="anchor-acc"></button></li>
-        </ul>
-      </div>
+  <div class="main-header">
+    <div>
+      <img class="logo" src="{{url_for('static' , filename='images/logo.png')}}" alt="logo">
+      <h1 class="heading">My 2<span class="d-wrap">D<span class="tick">&#10003;</span></span></h1>
     </div>
+    <div>
+      <ul class="nav-links">
+        <li><a class="anchor" href="{{ url_for('main.index') }}">Home</a></li>
+        <li><a href="{{url_for('main.Todo')}}" class="anchor"><p>Todo</p></a></li>
+        {% if current_user.is_authenticated %}
+          <li><a href="{{url_for('main.History')}}" class="anchor"><p>History</p></a></li>
+          <li><a class="anchor">Hi, {{ current_user.username }}!</a></li>
+          <li><a class="anchor" href="{{ url_for('main.Logout') }}">Logout</a></li>
+        {% else %}
+          <li><a class="anchor" href="{{ url_for('main.Login') }}">Log-in</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div class="alert alert-{{ category }}">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 
-    {% block content %}
-      <div class="main">
-        <div class="banner">
-          <div class="img">
-            <img src="{{url_for('static' , filename='images/sticker.png')}}" alt="sticker">
+  {% block content %}
+    <div class="main">
+      <div class="banner">
+        <div class="img">
+          <img src="{{url_for('static' , filename='images/sticker.png')}}" alt="sticker">
+        </div>
+        <div class="headtext">
+          <div class="h2">
+            <h2>Clear Your Head.</h2>
+            <h2>Crush Your Day.</h2>
           </div>
-          <div class="headtext">
-            <div class="h2">
-              <h2>Clear Your Head.</h2>
-              <h2>Crush Your Day.</h2>
-            </div>
-            <div class="h5">
-              <h5>Your unified space for every task,</h5>
-              <h5>goal, and idea. Start managing your</h5>
-              <h5>to-do list the smarter way.</h5>
-            </div>
-            <a href="{{url_for('main.Todo')}}" class="btn"><p>Let's Start &#8594;</p></a>
+          <div class="h5">
+            <h5>Your unified space for every task,</h5>
+            <h5>goal, and idea.</h5>
           </div>
+          <a href="{{url_for('main.Todo')}}" class="btn"><p>Let's Start &#8594;</p></a>
         </div>
       </div>
-    {% endblock %}
-{% include 'footer.html' %}
-  </div>
+    </div>
+  {% endblock %}
+
+  {% include 'footer.html' %}
+
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </body>
 </html>

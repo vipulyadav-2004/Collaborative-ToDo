@@ -4,24 +4,21 @@
     box-sizing: border-box;
 
 }
-body{
+html, body {
   font-family: Arial, Helvetica, sans-serif;
-  
+  height: 100%;
 }
 
-
-.container{
-  height: 100vh;
+body {
   width: 100%;
   display: grid;
   background: linear-gradient(135deg, #1e2423, #000000);
-  display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 70px 2fr auto;
-  grid-template-areas: "header "
-  "main "
-  "footer ";
-  
+  grid-template-rows: 70px 1fr auto; /* Header, Main Content (stretches), Footer */
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
 }
 .main-header {
     width: 100%;
