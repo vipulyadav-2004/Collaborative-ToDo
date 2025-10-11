@@ -2,7 +2,6 @@ services:
   - type: web
     name: collaborative-todo
     env: python
-    # This command now runs both steps: installs packages AND upgrades the database
     buildCommand: "pip install -r requirements.txt && python -m flask db upgrade"
     startCommand: "gunicorn 'backend:create_app()'"
     envVars:
@@ -10,3 +9,8 @@ services:
         generateValue: true
       - key: FLASK_APP
         value: backend:create_app
+    # Add this section to create the persistent disk
+    disks:
+      - name: sqlite-data
+        mountPath: /var/data/render # The path specified in RENDER_DISK_PATH
+        sizeGB: 1 # The smallest size is fine for your project
