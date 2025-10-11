@@ -16,8 +16,10 @@ def create_app():
     app = Flask(__name__)
 
     # --- Configurations ---
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/site.db'
+    instance_path = os.path.join(os.environ.get('RENDER_INSTANCE_DIR', ''), 'instance')
+    os.makedirs(instance_path, exist_ok=True)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(instance_path, 'site.db')
+    
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # --- Initialize Extensions ---
