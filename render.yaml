@@ -2,10 +2,11 @@ services:
   - type: web
     name: collaborative-todo
     env: python
-    buildCommand: "pip install -r requirements.txt"
+    # This command now runs both steps: installs packages AND upgrades the database
+    buildCommand: "pip install -r requirements.txt && flask db upgrade"
     startCommand: "gunicorn 'backend:create_app()'"
     envVars:
       - key: SECRET_KEY
-        generateValue: true # Render will generate a random secret key
+        generateValue: true
       - key: FLASK_APP
         value: backend:create_app
