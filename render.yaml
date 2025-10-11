@@ -4,13 +4,15 @@ services:
     env: python
     buildCommand: "pip install -r requirements.txt && python -m flask db upgrade"
     startCommand: "gunicorn 'backend:create_app()'"
+    disks:
+      - name: sqlite-data
+        mountPath: /var/data/render/sqlite
+        sizeGB: 1
     envVars:
       - key: SECRET_KEY
         generateValue: true
       - key: FLASK_APP
         value: backend:create_app
-    # Add this section to create the persistent disk
-    disks:
-      - name: sqlite-data
-        mountPath: /var/data/render # The path specified in RENDER_DISK_PATH
-        sizeGB: 1 # The smallest size is fine for your project
+      # This tells the app exactly where the database is on the persistent disk
+      - key: DATABASE_URL
+        value: "sqlite:////var/data/render/sqlite/site.db"
