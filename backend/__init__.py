@@ -20,7 +20,7 @@ def create_app():
     os.makedirs(data_dir, exist_ok=True)
     db_path = os.path.join(data_dir, 'site.db')
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
-    
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # --- Initialize Extensions ---
