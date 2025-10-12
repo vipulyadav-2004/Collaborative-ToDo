@@ -130,4 +130,7 @@
  .history-box{
     width: 350px;
  }
+ .task-box{
+    padding: 10px;
+ }
 }
