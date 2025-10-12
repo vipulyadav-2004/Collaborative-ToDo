@@ -115,7 +115,7 @@
     font-weight: bold;
     color: #333333;
 }
-@media (max-width: 768px) {
+@media (max-width: 748px) {
   .para, .to-do {
     /* Make containers fluid */
     width: 80%; 
@@ -128,6 +128,6 @@
     margin-bottom: 20px;
   }
  .history-box{
-    width: 300px;
+    width: 400px;
  }
 }
