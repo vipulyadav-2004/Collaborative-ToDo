@@ -27,7 +27,7 @@
 .task-box {
     list-style: none; /* Removes the bullet points */
     padding: 20px;
-    margin: 0;
+    margin-left: 10px;
 }
 
 /* This is the individual <li> for each task item */
